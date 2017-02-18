@@ -1,118 +1,122 @@
-#tic tac toe 
-player_1_symb=''
-player_2_symb=''
-board = [[None,None,None],[None,None,None],[None,None,None]]
+# Assume that player 1 always chooses 'x' and 2 always chooses 'o'
+
+board = [[None, None, None], [None, None, None], [None, None, None]]
 
 
-def welcome_message():
+def welcome_msg():
     """
-    Function to just greet the Player.
-    """
-    print "="*21
-    print "*"*7+"Welcome"+"*"*7
-    print "="*21
-    
-    
 
-def choice_of_symbol():
+    :return: String that welcomes the user
     """
-    Get the choice of the symbol
-    """
-    global player_1_symb
-    global player_2_symb
-    player_1_symb=raw_input("Choose '1' or '0' as the symbol for player 1 : ")
-    if player_1_symb =='1':
-        player_2_symb='0'
-    else:
-        player_2_symb='1'
+    return "=" * 21 + "\n*      Welcome      *\n" + "=" * 21
 
-def pos_map(num,symbol):
-    """
-    Map the position entered by the user to the matrix
-    """
+
+def map_position(pos, player_num):
     global board
-    if num==1:
-        board[0][1]=symbol
-    elif num==2:
-        board[0][2]=symbol
-    elif num==3:
-        board[0][3]=symbol
-    elif num==4:
-        board[1][1]=symbol
-    elif num==5:
-        board[1][2]=symbol
-    elif num==6:
-        board[1][3]=symbol
-    elif num==7:
-        board[2][1]=symbol
-    elif num==8:
-        board[2][2]=symbol
-    elif num==9:
-        board[2][3]=symbol
+    if player_num == 1:
+
+        if pos == 1 and board[0][0] is None:
+            board[0][0] = 'x'
+        elif pos == 2 and board[0][1] is None:
+            board[0][1] = 'x'
+        elif pos == 3 and board[0][2] is None:
+            board[0][2] = 'x'
+        elif pos == 4 and board[1][0] is None:
+            board[1][0] = 'x'
+        elif pos == 5 and board[1][1] is None:
+            board[1][1] = 'x'
+        elif pos == 6 and board[1][2] is None:
+            board[1][2] = 'x'
+        elif pos == 7 and board[2][0] is None:
+            board[2][0] = 'x'
+        elif pos == 8 and board[2][1] is None:
+            board[2][1] = 'x'
+        elif pos == 9 and board[2][2] is None:
+            board[2][2] = 'x'
+        else:
+            print "Invalid location or location already filled"
+    elif player_num == 2:
+        if pos == 1 and board[0][0] is None:
+            board[0][0] = 'o'
+        elif pos == 2 and board[0][1] is None:
+            board[0][1] = 'o'
+        elif pos == 3 and board[0][2] is None:
+            board[0][2] = 'o'
+        elif pos == 4 and board[1][0] is None:
+            board[1][0] = 'o'
+        elif pos == 5 and board[1][1] is None:
+            board[1][1] = 'o'
+        elif pos == 6 and board[1][2] is None:
+            board[1][2] = 'o'
+        elif pos == 7 and board[2][0] is None:
+            board[2][0] = 'o'
+        elif pos == 8 and board[2][1] is None:
+            board[2][1] = 'o'
+        elif pos == 9 and board[2][2] is None:
+            board[2][2] = 'o'
+        else:
+            print "Invalid location or location already filled"
     else:
-        print "Invalid Position entered."
-    
+        print "Invalid Player"
 
-def get_input():
-    print "Input the position at which you want to place "
-    print "\n 1 | 2 | 3 \n"+"-"*11+"\n 4 | 5 | 6 \n"+"-"*11+"\n 7 | 8 | 9 \n"
-    
-
-def check_winning_condtn():
-    if board[0][0]==board[0][1]==board[0][2]:
-        return True
-    elif board[1][0]==board[1][1]==board[1][2]:
-        return True
-    elif board[2][0]==board[2][1]==board[2][2]:
-        return True
-    elif board[0][0]==board[1][0]==board[2][0]:
-        return True
-    elif board[0][1]==board[1][1]==board[2][1]:
-        return True
-    elif board[0][2]==board[1][2]==board[2][2]:
-        return True
-    elif board[0][0]==board[1][1]==board[2][2]:
-        return True
-    elif board[2][0]==board[1][1]==board[0][2]:
-        return True
-
-def check_draw(l):
-    if l[0][0]!=None and l[0][1]!=None and l[0][2]!=None and l[1][0]!=None and l[1][1]!=None and l[1][2]!=None and l[2][0]!=None and l[2][1]!=None and l[2][2]!=None:
+def chk_draw_condtn():
+    if board[0][0]!=None and board[0][1]!=None and board[0][2]!=None and board[1][0]!=None and board[1][1]!=None and board[1][2]!=None and board[2][0]!=None and board[2][1]!=None and board[2][2]!=None:
         return True
     else:
         return False
 
-        
-welcome_message()
-choice_of_symbol()
+def chk_winning_condtn():
+    if (board[0][0] == board[0][1] == board[0][2] == 'x') or (board[0][0] == board[0][1] == board[0][2] == 'o'):
+        return True
+    elif (board[1][0] == board[1][1] == board[1][2] == 'x') or (board[1][0] == board[1][1] == board[1][2] == 'o'):
+        return True
+    elif (board[2][0] == board[2][1] == board[2][2] == 'x') or (board[2][0] == board[2][1] == board[2][2] == 'o'):
+        return True
+    elif (board[0][0] == board[1][0] == board[2][0] == 'x') or (board[0][0] == board[1][0] == board[2][0] == 'o'):
+        return True
+    elif (board[0][1] == board[1][1] == board[2][1] == 'x') or (board[0][1] == board[1][1] == board[2][1] == 'o'):
+        return True
+    elif (board[0][2] == board[1][2] == board[2][2] == 'x') or (board[0][2] == board[1][2] == board[2][2] == 'o'):
+        return True
+    elif (board[0][0] == board[1][1] == board[2][2] == 'x') or (board[0][0] == board[1][1] == board[2][2] == 'o'):
+        return True
+    elif (board[0][2] == board[1][1] == board[2][0] == 'x') or (board[0][2] == board[1][1] == board[2][0] == 'o'):
+        return True
+    else:
+        return False
 
 
-while (True):
-    #Getting player 1's input
-    print ("\n"+"="*15+"\nPlayer 1's turn"+"\n"+"="*15)
-    get_input()
-    pos1 = raw_input("\nEnter the position : ")
-    pos_map(pos1,player_1_symb)
-    
-    if check_winning_condtn():
-        print "Player 1 won the game !! "
+# 00 01 02
+# 10 11 12
+# 20 21 22
+
+print welcome_msg()
+# raw_input("\nEnter player 1's position (0,1,2,3,4,5) :")
+while True:
+    posA = input("Player 1's turn : \n===================== \n")
+    map_position(posA, 1)
+
+    if chk_winning_condtn():
+        print "Player 1 won the game"
         break
-    if check_draw(board):
-        print "It's a draw. :-|"
+    elif chk_draw_condtn():
+        print "It's a draw"
         break
-    
-    #Getting player 2's input
-    print ("\n"+"="*15+"\nPlayer 2's turn"+"\n"+"="*15)
-    get_input()
-    pos2 = raw_input("\nEnter the position : ")
-    
-    pos_map(pos2,player_2_symb)
-    if check_winning_condtn():
-        print "Player 2 won the game !! "
+
+    print board
+    print "\n\n"+"="*10
+
+    posB = input("Player 2's turn : \n===================== \n")
+    map_position(posB, 2)
+
+    if chk_winning_condtn():
+        print "Player 2 won the game"
         break
-    
-    if check_draw(board):
-        print "It's a draw. :-|"
+    elif chk_draw_condtn():
+        print "It's a draw"
         break
-    
-    
+
+    print board
+    print "\n\n" + "=" * 10
+
+
